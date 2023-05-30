@@ -66,7 +66,7 @@ function UserTable() {
                                         </a>
                                         <div className="dropdown-menu" aria-labelledby="triggerId1">
                                             <button type="button" className="dropdown-item" onClick={() => dispatch(editUser({index, id: user.id}))}><i className="fa fa-pencil mr-1"></i> Edit </button>
-                                            <button type=button><a className="dropdown-item text-danger" href="#" onClick={() => dispatch(deleteUser({index, id: user.id}))}><i className="fa fa-trash mr-1"></i> Delete </a></button>
+                                            <button type="button"><span className="dropdown-item text-danger" onClick={() => dispatch(deleteUser({index, id: user.id}))}><i className="fa fa-trash mr-1"></i> Delete </span></button>
                                         </div>
                                     </div>
                                 </td>
