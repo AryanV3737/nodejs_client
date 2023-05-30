@@ -52,7 +52,7 @@ function getEmptyuserForm() {
 const initialState = {
   users: usersJson,
   userForm: getEmptyuserForm(),
-  currUserFormConfig: { index: -1, id = -1 , buttonType: 'Book' },
+  currUserFormConfig: { index: -1, buttonType: 'Book' },
   status: 'idle',
 };
 
