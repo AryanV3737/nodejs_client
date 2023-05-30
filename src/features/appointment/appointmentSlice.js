@@ -96,7 +96,7 @@ export const appointmentSlice = createSlice({
         });
       }
       state.userForm = getEmptyuserForm();
-      state.currUserFormConfig = { index: -1, id: -1, buttonType: 'Book' };
+      state.currUserFormConfig = { index: -1, buttonType: 'Book' };
     },
     formChange: (state, action) => {
       state.userForm[action.payload.name] = action.payload.value;
