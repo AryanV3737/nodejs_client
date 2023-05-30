@@ -50,9 +50,9 @@ function getEmptyuserForm() {
 }
 
 const initialState = {
-  users: usersJson, // Initialize with the usersJson data
+  users: userJson,
   userForm: getEmptyuserForm(),
-  currUserFormConfig: { index: -1, id: -1, buttonType: 'Book' }, // Corrected the property name
+  currUserFormConfig: { index: -1, buttonType: 'Book' },
   status: 'idle',
 };
 
@@ -62,24 +62,38 @@ export const appointmentSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    getUsers: (state) => {  // Removed the unused 'action' parameter
-      state.users = usersJson;
+    getUsers: (state, action) => {
+      state.users = action.payload;
     },
     editUser: (state, action) => {
-      state.userForm = { ...state.users[action.payload.index] }; // Fixed the property name
+      state.userForm = { ...state.users[action.payload] };
       state.currUserFormConfig = { index: action.payload.index, id: action.payload.id, buttonType: 'Update' };
     },
     deleteUser: (state, action) => {
       state.users.splice(action.payload.index, 1);
-      // No fetch call in the reducer. Move the API call outside of the reducer.
+      fetch(`http://localhost:3001/api/users/${action.payload.id}`, {
+        method: 'DELETE'
+      });
     },
     formSubmit: (state, action) => {
       if (action.payload === 'Book') {
         state.users.push(state.userForm);
-        // No fetch call in the reducer. Move the API call outside of the reducer.
+        fetch('http://localhost:3001/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(state.userForm)
+        });
       } else { // update appointment
         state.users[state.currUserFormConfig.index] = state.userForm;
-        // No fetch call in the reducer. Move the API call outside of the reducer.
+        fetch(`http://localhost:3001/api/users/${state.currUserFormConfig.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(state.userForm)
+        });
       }
       state.userForm = getEmptyuserForm();
       state.currUserFormConfig = { index: -1, id: -1, buttonType: 'Book' };
