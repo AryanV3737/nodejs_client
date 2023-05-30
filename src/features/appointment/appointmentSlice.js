@@ -50,9 +50,9 @@ function getEmptyuserForm() {
 }
 
 const initialState = {
-  users: userJson,
+  users: usersJson,
   userForm: getEmptyuserForm(),
-  currUserFormConfig: { index: -1, buttonType: 'Book' },
+  currUserFormConfig: { index: -1, id = -1 , buttonType: 'Book' },
   status: 'idle',
 };
 
@@ -62,8 +62,8 @@ export const appointmentSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    getUsers: (state, action) => {
-      state.users = action.payload;
+    getUsers: (state) => {
+      state.users = usersJson;
     },
     editUser: (state, action) => {
       state.userForm = { ...state.users[action.payload] };
