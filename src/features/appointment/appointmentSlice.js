@@ -66,7 +66,7 @@ export const appointmentSlice = createSlice({
       state.users = usersJson;
     },
     editUser: (state, action) => {
-      state.userForm = { ...state.users[action.payload] };
+      state.userForm = { ...state.users[action.payload.index] };
       state.currUserFormConfig = { index: action.payload.index, id: action.payload.id, buttonType: 'Update' };
     },
     deleteUser: (state, action) => {
