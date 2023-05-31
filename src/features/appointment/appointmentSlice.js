@@ -62,8 +62,8 @@ export const appointmentSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    getUsers: (state) => {
-      state.users = usersJson;
+    getUsers: (state, action) => {
+      state.users = action.payload ;
     },
     editUser: (state, action) => {
       state.userForm = { ...state.users[action.payload] };
