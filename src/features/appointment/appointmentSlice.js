@@ -50,7 +50,7 @@ function getEmptyuserForm() {
 }
 
 const initialState = {
-  users: usersJson,
+  users: [],
   userForm: getEmptyuserForm(),
   currUserFormConfig: { index: -1, buttonType: 'Book' },
   status: 'idle',
@@ -66,7 +66,7 @@ export const appointmentSlice = createSlice({
       state.users = usersJson;
     },
     editUser: (state, action) => {
-      state.userForm = { ...state.users[action.payload.index] };
+      state.userForm = { ...state.users[action.payload] };
       state.currUserFormConfig = { index: action.payload.index, id: action.payload.id, buttonType: 'Update' };
     },
     deleteUser: (state, action) => {
