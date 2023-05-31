@@ -8,7 +8,7 @@ function UserTable() {
 
     // load users only once
     useEffect(() => {
-        fetch('http://localhost:3001/api/users')
+        fetch('/api/users')
             .then(response => response.json())
             .then(data => dispatch(getUsers(data)));
     }, [dispatch]);
